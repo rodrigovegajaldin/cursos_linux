@@ -1,0 +1,29 @@
+OBJS = main.o salida.o calculadora.o
+BINARY = programa
+x = Hola
+y = ${x} Adios
+CFLAGS = -g -Wall
+
+all: programa clean
+
+programa: ${OBJS}
+	gcc -o ${BINARY} ${OBJS}
+
+#main.o: main.c funciones.h
+
+#salida.o: salida.c funciones.h
+
+#calculadora.o: calculadora.c funciones.h
+# puedo borrar estas reglas y poner:
+
+%.o: %.c
+	gcc $(CFLAGS) -c $< -o $@
+	#$< es una variable predefinida, este devuelve el primero valor de las dependencias
+	#$@ esto devuelve el nombre de los targets	
+
+clean:
+	rm -f ${BINARY} ${OBJS}
+
+imprimir:
+	@echo ${x} #poner el arroba al inicio hace que no se imprima el comando cuando se ejecuta
+	echo ${y}	

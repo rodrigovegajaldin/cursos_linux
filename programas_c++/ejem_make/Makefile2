@@ -1,0 +1,26 @@
+OBJS = main.o salida.o calculadora.o
+BINARY = programa
+x = Hola
+y = ${x} Adios
+
+all: programa clean
+
+programa: ${OBJS}
+	gcc -o ${BINARY} ${OBJS}
+
+main.o: main.c funciones.h
+	#gcc -c main.c
+	#se pueden obviar los comandos de compilacion y solo detallar el target y las dependencias, make ya sabra como ejecutar
+
+salida.o: salida.c funciones.h
+	#gcc -c salida.c
+
+calculadora.o: calculadora.c funciones.h
+	#gcc -c calculadora.c
+
+clean:
+	rm -f ${BINARY} ${OBJS}
+
+imprimir:
+	@echo ${x} #poner el arroba al inicio hace que no se imprima el comando cuando se ejecuta
+	echo ${y}	
